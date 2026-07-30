@@ -1,0 +1,26 @@
+{
+  "$schema": "https://skills.sh/schemas/skills.sh.schema.json",
+  "notGrouped": "bottom",
+  "groupings": [
+    {
+      "title": "Setup",
+      "description": "Bootstrap a Blitzy workspace and its shared configuration",
+      "skills": ["blitzy-init", "blitzy-env", "blitzy-rule"]
+    },
+    {
+      "title": "Authoring",
+      "description": "From first ingestion to a submission-ready generation prompt",
+      "skills": ["blitzy-ingest", "blitzy-scope", "blitzy-prompt"]
+    },
+    {
+      "title": "Review & Refine",
+      "description": "Source-grounded reviews at every control point, and refine prompts that land",
+      "skills": ["blitzy-review-spec", "blitzy-review-aap", "blitzy-review-code", "blitzy-refine"]
+    },
+    {
+      "title": "Tracking",
+      "description": "Cross-session, cross-engineer project state",
+      "skills": ["blitzy-status"]
+    }
+  ]
+}

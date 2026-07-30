@@ -1,0 +1,40 @@
+name: validate
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Shared references in sync
+        run: node scripts/sync-shared.mjs --check
+
+      - name: No SKILL.md at repo root
+        run: test ! -f SKILL.md
+
+      - uses: astral-sh/setup-uv@v5
+
+      - name: Validate every skill against the Agent Skills spec
+        run: |
+          for d in skills/*/; do
+            uvx --from git+https://github.com/agentskills/agentskills#subdirectory=skills-ref \
+              skills-ref validate "$d"
+          done
+
+      - name: Installer discovers all skills
+        run: |
+          npx --yes skills add ./ --list | tee /tmp/skills-list.txt
+          for s in blitzy-init blitzy-env blitzy-rule blitzy-ingest blitzy-scope \
+                   blitzy-prompt blitzy-review-spec blitzy-review-aap \
+                   blitzy-review-code blitzy-refine blitzy-status; do
+            grep -q "$s" /tmp/skills-list.txt || { echo "::error::$s not discovered"; exit 1; }
+          done
