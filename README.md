@@ -19,14 +19,19 @@ engineers.
 ## Install
 
 ```sh
-npx skills add https://github.com/nexdrew/blitzy-skills            # pick skills interactively
-npx skills add https://github.com/nexdrew/blitzy-skills --skill '*'          # all 11
+# pick skills interactively
+npx skills add https://github.com/nexdrew/blitzy-skills
+
+# install all 11 skills
+npx skills add https://github.com/nexdrew/blitzy-skills --skill '*'
+
+# install just the `blitzy-review-code` skill
 npx skills add https://github.com/nexdrew/blitzy-skills --skill blitzy-review-code
 ```
 
 Recommended companions: [`blitzy-cli`](https://github.com/nexdrew/blitzy-cli) (v1.1+;
 the skills use it when present and fall back to the Blitzy UI when not) and the
-[`gh`](https://cli.github.com) CLI. `blitzy-init` installs both for you.
+[`gh`](https://cli.github.com) CLI. `blitzy-init` optionally installs both for you.
 
 ## The skills
 
@@ -73,9 +78,15 @@ never leaks into generation context.
 ## Development
 
 ```sh
-node scripts/sync-shared.mjs           # propagate shared/ references into every skill
-node scripts/sync-shared.mjs --check   # CI drift check
-npx skills add ./ --list               # verify installer discovery
+# propagate shared/ references into every skill
+node scripts/sync-shared.mjs
+
+# CI drift check
+node scripts/sync-shared.mjs --check
+
+# verify installer discovery
+npx skills add ./ --list
+
 # validate against the Agent Skills spec:
 #   uvx --from git+https://github.com/agentskills/agentskills#subdirectory=skills-ref \
 #     skills-ref validate skills/<name>
