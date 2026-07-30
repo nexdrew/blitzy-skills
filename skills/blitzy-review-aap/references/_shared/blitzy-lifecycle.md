@@ -54,10 +54,12 @@ Blitzy's published docs — flag the divergence to users when it comes up.
    freedom; Blitzy's Merge button offers no merge-strategy choice. Use GitHub for what
    GitHub does best; use Blitzy for what only Blitzy can do. Exception: Blitzy's
    **Fix Merge Conflicts** action is still the right tool for conflicts on Blitzy PRs.
-6. **Submodule PR ordering** (official, and important): complete all Refine PR cycles
-   first (refine jobs read from submodule branches), then merge the parent repo PR, then
-   merge submodule PRs and update submodule pointers. Never close or merge submodule PRs
-   while refine cycles are active.
+6. **Submodule PRs and refine cycles**: complete all Refine PR cycles before merging
+   or closing ANY submodule PR — refine jobs read from submodule branches, and touching
+   one mid-cycle breaks the job (official warning, can require manual recovery). Once
+   refine cycles are done, the merge order of parent vs submodule PRs is the team's
+   choice — record it in `conventions.md` — with the submodule pointers in the parent
+   updated at the end either way.
 
 ## Right-sizing (what Blitzy is for)
 

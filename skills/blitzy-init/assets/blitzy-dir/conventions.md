@@ -14,6 +14,9 @@
 - Merge mechanics: merge in **GitHub** (not the Blitzy UI), using **squash-merge** for
   linear history and Conventional Commits. Use Blitzy's "Fix Merge Conflicts" for
   conflicts on Blitzy PRs.
+- Submodule PR merge order: <your choice — e.g. submodule PRs first, then the parent
+  PR, then update the parent's submodule refs; or parent first. The one fixed rule:
+  never merge/close a submodule PR while a Refine PR cycle is active.>
 
 ## Review routing
 

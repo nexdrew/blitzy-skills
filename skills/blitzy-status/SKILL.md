@@ -45,7 +45,7 @@ Common transitions to detect (platform fact → what it means for our stage):
 | Run in progress | generating → **warn: do not push to the branch** |
 | PR open while our stage = generating | code is out → next action `blitzy-review-code` |
 | PR updated after our last refine round | refine cycle done → re-review the delta |
-| Parent PR merged, submodule PRs open | merge submodule PRs + update pointers (only if refine cycles are done) |
+| PR set partially merged (parent or submodules still open) | finish merging the set (order per conventions.md; only after refine cycles are done), then update submodule pointers |
 | PR merged while our stage = team-review | stage → merged → next action **Sync tech spec** |
 | Our stage = merged/synced but platform shows a new run | someone started something — investigate before acting |
 
@@ -68,8 +68,9 @@ Follow with alerts, most urgent first:
 - **Generation in flight** → do not push to the branch until it completes.
 - **AAP awaiting review** → the AAP is the primary control point; review before it
   turns into code (`blitzy-review-aap`).
-- **Submodule PRs outstanding after parent merge** → merge them and bump pointers;
-  never merge/close submodule PRs while refine cycles are still active.
+- **PR set partially merged** → finish merging the parent/submodule set (order per
+  conventions.md) and update submodule pointers; never merge/close submodule PRs while
+  refine cycles are still active.
 - **Merged but not synced** → run **Sync tech spec** in the Blitzy UI before creating
   the next project on this repo/branch (see `references/_shared/blitzy-lifecycle.md`,
   workflow position 2).
@@ -90,7 +91,7 @@ When a project file's `nextAction` is stale or missing, derive it from the stage
 | reviewing-code | finish pass 1 → `blitzy-refine` (findings) or advance to team-review |
 | refining | when the refine PR cycle lands, re-review the delta (`blitzy-review-code`) |
 | team-review | pass 2 by engineers; then a human merges in GitHub (squash) per conventions.md |
-| merged | merge submodule PRs in order, bump pointers, **Sync tech spec**, stage → synced |
+| merged | finish any remaining PRs of the set, bump submodule pointers, **Sync tech spec**, stage → synced |
 | synced | `blitzy-scope` for what's next |
 | closed | nothing — note why it closed in the log |
 

@@ -17,8 +17,8 @@ turn into a generation prompt without re-deriving decisions. This is lifecycle s
 Shared references (synced from the repo's `/shared` directory — treat as authoritative):
 
 - Read `references/_shared/blitzy-lifecycle.md` when you need the stage table, the
-  workflow positions (mainline-branch, sync-over-reingest, submodule PR ordering), or
-  the right-sizing definition.
+  workflow positions (mainline-branch, sync-over-reingest, submodule refine-cycle
+  rule), or the right-sizing definition.
 - Read `references/_shared/blitzy-memory.md` when locating or updating `.blitzy/`
   (layout, project-file schema, the conventions.md contract).
 - Read `references/_shared/blitzy-cli.md` before running any `blitzy` command
@@ -114,8 +114,9 @@ This is where scoping earns its keep. For the selected set of projects:
      re-checked against it).
 3. **Merge-order plan** — for concurrent projects, decide up front whose PR merges
    first, who rebases, and (for submodule setups) when parent-repo pointer bumps
-   happen. Follow the submodule PR ordering in `references/_shared/blitzy-lifecycle.md`
-   (refine cycles finish first, then parent PR, then submodule PRs and pointer bumps).
+   happen. Parent vs submodule merge order within one project is the team's choice
+   (see `conventions.md`); the fixed rules are that refine cycles finish before any
+   submodule PR merges or closes, and pointer bumps come last.
 4. State the standing constraint in the plan: **no one pushes to the target branch
    while any generation is in flight.**
 
