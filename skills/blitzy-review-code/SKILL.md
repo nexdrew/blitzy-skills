@@ -108,9 +108,10 @@ changed component check:
 - Merge guidance to include in the report (never act on it yourself): a **human**
   merges, in **GitHub** (squash-merge for linear history + Conventional Commits;
   Blitzy's UI offers no merge-strategy choice — use Blitzy's "Fix Merge Conflicts" only
-  for conflicts). Submodule ordering: complete all refine cycles → merge parent PR →
-  merge submodule PRs → bump pointers. Never merge/close a submodule PR while refine
-  cycles are active.
+  for conflicts). Submodules: never merge/close a submodule PR while refine cycles are
+  active (refine jobs read from submodule branches); once cycles are done, the parent
+  vs submodule merge order is the team's choice per `conventions.md`, with the
+  submodule pointers in the parent updated at the end.
 - Update the project file: stage `reviewing-code` (or `team-review` when pass 1 is
   clean), nextAction, log entry linking the findings file.
 
