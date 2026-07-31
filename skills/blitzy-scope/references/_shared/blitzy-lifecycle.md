@@ -42,6 +42,11 @@ Blitzy's published docs — flag the divergence to users when it comes up.
    submodules to an existing parent repo also needs no ingestion prompt. *Diverges from
    Blitzy's docs* ("include a minimal ingestion prompt every time"); this guidance came
    from Blitzy technical support and avoids full re-ingests that rewrite the spec.
+   **AAP preservation caveat**: running Sync tech spec through a project REPLACES that
+   project's downloadable AAP (the `target_tech_spec` document) with the synced Tech
+   Spec, unrecoverably. Download and save the project's AAP (to `.blitzy/prompts/`)
+   BEFORE syncing through it — and whenever refreshing a saved AAP, verify the download
+   still opens as an Agent Action Plan (§0.1 Intent Clarification), not a Tech Spec.
 3. **Review is the product.** The AAP is the primary control point ("what the AAP says
    is what the code does" — Blitzy does not improvise beyond the plan). Reviews here are
    source-grounded and adversarial by default; a `quick` mode exists for low-risk work.

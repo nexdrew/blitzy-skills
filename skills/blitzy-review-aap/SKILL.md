@@ -146,3 +146,8 @@ Mechanics: download the AAP as Markdown, edit, re-upload in the UI.
   refinement.
 - Track iterations in the project file — the 2+-iterations → discard heuristic only
   works if you count.
+- Save the final AAP to `.blitzy/prompts/` once approved: **Sync tech spec run through
+  a project replaces its downloadable AAP with the Tech Spec** (see
+  `references/_shared/blitzy-lifecycle.md`, workflow position 2) — the AAP is only
+  reliably downloadable before that. Verify any AAP download opens as an Agent Action
+  Plan (§0.1 Intent Clarification), not a Tech Spec.
