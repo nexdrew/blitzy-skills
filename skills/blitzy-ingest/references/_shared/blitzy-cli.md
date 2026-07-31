@@ -52,18 +52,21 @@ prompt as submitted) · `--all` (default).
 
 Every artifact the CLI downloads is also available in the Blitzy UI (project page →
 documents) — ask the user to download it and provide the path. To install the CLI,
-offer `blitzy-init`, or install from npm (Node ≥ 20):
+offer `blitzy-init`, or install through a package manager:
 
 ```sh
-npm install -g blitzy-cli     # installs the `blitzy` command
-npx blitzy-cli <command>      # or run ad hoc without installing
+brew install nexdrew/tap/blitzy-cli   # Homebrew (macOS/Linux); standalone binary, no Node needed
+npm install -g blitzy-cli             # npm (Node ≥ 20)
+npx blitzy-cli <command>              # or run ad hoc via npx without installing
 ```
 
-The npm package is published with npm provenance (a Sigstore attestation linking each
-release to its source repo and build workflow; verifiable with `npm audit signatures`).
-Standalone binaries also exist for environments without Node — see the blitzy-cli
-project README for details. Do not download or install binaries on the user's behalf;
-that is a manual step for the user to take and verify themselves.
+Both channels are verifiable: the npm package is published with npm provenance
+(checkable with `npm audit signatures`), and the Homebrew formula pins each binary's
+sha256 — with every binary carrying a GitHub build-provenance attestation
+(`gh attestation verify <file> --repo nexdrew/blitzy-cli`). Raw standalone binaries
+also exist for environments with neither brew nor Node — see the blitzy-cli project
+README. Do not download or install raw binaries on the user's behalf; that is a manual
+step for the user to take and verify themselves.
 
 Do NOT try to call Blitzy's API with curl/fetch directly — the host is behind
 Cloudflare bot protection and rejects non-browser HTTP clients; the CLI's transport

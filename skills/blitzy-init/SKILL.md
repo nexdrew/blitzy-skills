@@ -110,21 +110,24 @@ Committed `.blitzyignore` = team-wide consistency.
 
 ### 5. Install the `blitzy` CLI
 
-Check `blitzy --version` first. If missing, install from **npm** (requires Node ≥ 20):
+Check `blitzy --version` first. If missing, install through a package manager — pick
+whichever the machine already has:
 
-```sh
-npm install -g blitzy-cli     # installs the `blitzy` command
-```
+- **Homebrew** (macOS/Linux; installs a standalone binary, no Node needed):
+  `brew install nexdrew/tap/blitzy-cli`
+- **npm** (Node ≥ 20): `npm install -g blitzy-cli` — or skip installing and use
+  `npx blitzy-cli <command>` per invocation.
 
-Without a global install, every skill also works with ad-hoc invocation:
-`npx blitzy-cli <command>`. The npm package is published with npm provenance
-(verifiable with `npm audit signatures`).
+Both channels are verifiable: the npm package is published with npm provenance
+(`npm audit signatures`); the Homebrew formula pins each binary's sha256, and every
+binary carries a GitHub build-provenance attestation
+(`gh attestation verify <file> --repo nexdrew/blitzy-cli`).
 
-If the machine has no Node.js, tell the user that standalone binaries exist for each
-release of the blitzy-cli project — but do NOT download or install one on their
-behalf. Point them at the project README (https://github.com/nexdrew/blitzy-cli) for
-the details and let them fetch, verify, and trust a binary themselves; then continue
-once `blitzy --version` works.
+If the machine has neither brew nor Node, tell the user that raw standalone binaries
+exist for each release of the blitzy-cli project — but do NOT download or install one
+on their behalf. Point them at the project README
+(https://github.com/nexdrew/blitzy-cli) and let them fetch, verify, and trust a binary
+themselves; then continue once `blitzy --version` works.
 
 Then authentication: `blitzy login` is interactive (password prompt) — the user must run
 it themselves. In Claude Code, suggest they type `! blitzy login` to run it inside the

@@ -30,7 +30,8 @@ npx skills add https://github.com/nexdrew/blitzy-skills --skill blitzy-review-co
 ```
 
 Recommended companions: [`blitzy-cli`](https://github.com/nexdrew/blitzy-cli) (v1.1+;
-the skills use it when present and fall back to the Blitzy UI when not) and the
+the skills use it when present and fall back to the Blitzy UI when not — install via
+`brew install nexdrew/tap/blitzy-cli` or `npm i -g blitzy-cli`) and the
 [`gh`](https://cli.github.com) CLI. `blitzy-init` optionally installs both for you.
 
 ## The skills
