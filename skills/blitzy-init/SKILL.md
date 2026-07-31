@@ -2,9 +2,10 @@
 name: blitzy-init
 description: Set up or repair a Blitzy workspace. Use when the user wants to get started with Blitzy, initialize or bootstrap a repo for Blitzy, create a parent repo with submodules for Blitzy ingestion, set up .blitzyignore, install the blitzy CLI or gh CLI, or create the shared .blitzy memory directory that the other blitzy-* skills depend on. Run this before any other blitzy-* skill in a workspace that has no .blitzy directory.
 license: MIT
+compatibility: Requires git. Uses the blitzy-cli and gh command-line tools when available, falling back to the Blitzy web UI otherwise.
 metadata:
   author: nexdrew
-  version: "0.1.0"
+  version: "0.2.0"
 ---
 
 # blitzy-init — bootstrap a Blitzy workspace
@@ -109,22 +110,24 @@ Committed `.blitzyignore` = team-wide consistency.
 
 ### 5. Install the `blitzy` CLI
 
-Check `blitzy --version` first. If missing, pick an install path:
+Check `blitzy --version` first. If missing, install through a package manager — pick
+whichever the machine already has:
 
-- **npm (preferred when Node ≥ 20 is present)**: `npm install -g blitzy-cli`
-- **Standalone binary** (no Node needed): download the right asset from
-  https://github.com/nexdrew/blitzy-cli/releases/latest —
-  `blitzy-darwin-arm64`, `blitzy-darwin-x64`, `blitzy-linux-x64`, `blitzy-linux-arm64`,
-  `blitzy-linux-x64-musl`, or `blitzy-windows-x64.exe`. Rename to `blitzy`, move onto
-  the PATH. **On macOS the downloaded binary is quarantined and ad-hoc-unsigned — run
-  this or it will not start:**
+- **Homebrew** (macOS/Linux; installs a standalone binary, no Node needed):
+  `brew install nexdrew/tap/blitzy-cli`
+- **npm** (Node ≥ 20): `npm install -g blitzy-cli` — or skip installing and use
+  `npx blitzy-cli <command>` per invocation.
 
-  ```sh
-  codesign --remove-signature <path-to-binary>
-  codesign --force --sign - <path-to-binary>
-  xattr -cr <path-to-binary>
-  chmod +x <path-to-binary>
-  ```
+Both channels are verifiable: the npm package is published with npm provenance
+(`npm audit signatures`); the Homebrew formula pins each binary's sha256, and every
+binary carries a GitHub build-provenance attestation
+(`gh attestation verify <file> --repo nexdrew/blitzy-cli`).
+
+If the machine has neither brew nor Node, tell the user that raw standalone binaries
+exist for each release of the blitzy-cli project — but do NOT download or install one
+on their behalf. Point them at the project README
+(https://github.com/nexdrew/blitzy-cli) and let them fetch, verify, and trust a binary
+themselves; then continue once `blitzy --version` works.
 
 Then authentication: `blitzy login` is interactive (password prompt) — the user must run
 it themselves. In Claude Code, suggest they type `! blitzy login` to run it inside the

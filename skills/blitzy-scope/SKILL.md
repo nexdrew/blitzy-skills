@@ -2,9 +2,10 @@
 name: blitzy-scope
 description: "Use when deciding what to build next with Blitzy, brainstorming or right-sizing Blitzy projects, splitting an epic or backlog into Blitzy-sized projects, planning concurrent Blitzy runs, sequencing dependent Blitzy work, or choosing a Blitzy build type. Turn goals, backlog items, and repo signals into right-sized, sequenced, concurrency-fenced project definitions - one scope doc per project (objective, in-scope/out-of-scope boundaries, build type, LOC and file-count estimate, environments and rules, dependencies, fence-verification results) each ready to hand to the blitzy-prompt skill. Covers candidate gathering, right-sizing per Blitzy's epic-into-stories guidance, the 7 UI build types, Sync-tech-spec checkpoints between dependent projects on the same repo and branch, file-footprint fencing for concurrent projects, and merge-order planning."
 license: MIT
+compatibility: Requires git. Uses the blitzy-cli and gh command-line tools when available, falling back to the Blitzy web UI otherwise.
 metadata:
   author: nexdrew
-  version: "0.1.0"
+  version: "0.2.0"
 ---
 
 # blitzy-scope
