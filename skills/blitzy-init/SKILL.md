@@ -2,6 +2,7 @@
 name: blitzy-init
 description: Set up or repair a Blitzy workspace. Use when the user wants to get started with Blitzy, initialize or bootstrap a repo for Blitzy, create a parent repo with submodules for Blitzy ingestion, set up .blitzyignore, install the blitzy CLI or gh CLI, or create the shared .blitzy memory directory that the other blitzy-* skills depend on. Run this before any other blitzy-* skill in a workspace that has no .blitzy directory.
 license: MIT
+compatibility: Requires git. Uses the blitzy-cli (npm) and gh command-line tools when available, falling back to the Blitzy web UI otherwise.
 metadata:
   author: nexdrew
   version: "0.1.0"
@@ -109,22 +110,21 @@ Committed `.blitzyignore` = team-wide consistency.
 
 ### 5. Install the `blitzy` CLI
 
-Check `blitzy --version` first. If missing, pick an install path:
+Check `blitzy --version` first. If missing, install from **npm** (requires Node ≥ 20):
 
-- **npm (preferred when Node ≥ 20 is present)**: `npm install -g blitzy-cli`
-- **Standalone binary** (no Node needed): download the right asset from
-  https://github.com/nexdrew/blitzy-cli/releases/latest —
-  `blitzy-darwin-arm64`, `blitzy-darwin-x64`, `blitzy-linux-x64`, `blitzy-linux-arm64`,
-  `blitzy-linux-x64-musl`, or `blitzy-windows-x64.exe`. Rename to `blitzy`, move onto
-  the PATH. **On macOS the downloaded binary is quarantined and ad-hoc-unsigned — run
-  this or it will not start:**
+```sh
+npm install -g blitzy-cli     # installs the `blitzy` command
+```
 
-  ```sh
-  codesign --remove-signature <path-to-binary>
-  codesign --force --sign - <path-to-binary>
-  xattr -cr <path-to-binary>
-  chmod +x <path-to-binary>
-  ```
+Without a global install, every skill also works with ad-hoc invocation:
+`npx blitzy-cli <command>`. The npm package is published with npm provenance
+(verifiable with `npm audit signatures`).
+
+If the machine has no Node.js, tell the user that standalone binaries exist for each
+release of the blitzy-cli project — but do NOT download or install one on their
+behalf. Point them at the project README (https://github.com/nexdrew/blitzy-cli) for
+the details and let them fetch, verify, and trust a binary themselves; then continue
+once `blitzy --version` works.
 
 Then authentication: `blitzy login` is interactive (password prompt) — the user must run
 it themselves. In Claude Code, suggest they type `! blitzy login` to run it inside the
