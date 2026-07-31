@@ -2,7 +2,7 @@
 name: blitzy-refine
 description: Turn review findings into a well-formed Blitzy Refine PR prompt. Use when the user wants to refine a Blitzy PR, request fixes from Blitzy, write CRITICAL Directives, or package code-review findings, human PR comments, or CI failures into a refinement request. Enforces atomic directives, batching, wiring verification, sibling-pattern scanning, and scope discipline.
 license: MIT
-compatibility: Requires git. Uses the blitzy-cli (npm) and gh command-line tools when available, falling back to the Blitzy web UI otherwise.
+compatibility: Requires git. Uses the blitzy-cli and gh command-line tools when available, falling back to the Blitzy web UI otherwise.
 metadata:
   author: nexdrew
   version: "0.2.0"

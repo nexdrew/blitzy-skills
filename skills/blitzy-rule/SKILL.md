@@ -2,7 +2,7 @@
 name: blitzy-rule
 description: Use when the user wants to create, review, list, inspect, apply, or verify Blitzy Rules — reusable directives / quality constraints attached to Blitzy projects and enforced across code generations ("add once, enforce everywhere"). Covers listing a team's existing rule register via the blitzy CLI, deciding rule vs inline prompt text, authoring rigorous rule definitions (name + description with Requirements / Forbidden Patterns / Validation Gate sections), adding rules in the Blitzy UI (prompting section or Settings > Rules), pointing at the 10 official rule templates, and checking that each rule's intent survived into the Agent Action Plan (AAP). Triggers include "blitzy rule", "add a rule to the project", "reusable directive", "quality constraint for generation", "rule register", "which rules do we have", and "my rule is missing from the AAP".
 license: MIT
-compatibility: Requires git. Uses the blitzy-cli (npm) and gh command-line tools when available, falling back to the Blitzy web UI otherwise.
+compatibility: Requires git. Uses the blitzy-cli and gh command-line tools when available, falling back to the Blitzy web UI otherwise.
 metadata:
   author: nexdrew
   version: "0.2.0"

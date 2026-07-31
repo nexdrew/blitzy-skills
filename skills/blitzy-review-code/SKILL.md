@@ -2,7 +2,7 @@
 name: blitzy-review-code
 description: Review a Blitzy-generated pull request end to end. Use when the user wants to review Blitzy PRs or generated code, evaluate a Blitzy Project Guide, decide whether to merge, refine, or close a Blitzy PR, or run the first review pass after code generation completes. Produces adversarially-verified findings and a merge-matrix verdict, and hands fixable findings to blitzy-refine.
 license: MIT
-compatibility: Requires git. Uses the blitzy-cli (npm) and gh command-line tools when available, falling back to the Blitzy web UI otherwise.
+compatibility: Requires git. Uses the blitzy-cli and gh command-line tools when available, falling back to the Blitzy web UI otherwise.
 metadata:
   author: nexdrew
   version: "0.2.0"

@@ -2,7 +2,7 @@
 name: blitzy-ingest
 description: Use when ingesting a git repository into Blitzy for the first time, onboarding a new codebase onto the Blitzy platform, preparing a repo for Blitzy, writing an ingestion prompt, or setting up .blitzyignore or git submodules for Blitzy. Applies the routing gate first — repos or branches Blitzy has already ingested need NO ingestion prompt (delta ingestion plus the Sync tech spec action handle those cases); an ingestion prompt there triggers a full re-ingest that replaces the Tech Spec entirely. For a genuine first ingestion, runs the repo prep checklist (mainline branch choice, submodule HTTPS URLs and per-repo access, .blitzyignore, metering and rebase pitfalls, supported file formats), authors the four-section ingestion prompt (Project Overview, Business Context & Domain Knowledge, Current Status & Evolution, Areas to Ignore), stores artifacts under .blitzy/, and gives exact UI steps to create the ingestion project, handing off to blitzy-review-spec.
 license: MIT
-compatibility: Requires git. Uses the blitzy-cli (npm) and gh command-line tools when available, falling back to the Blitzy web UI otherwise.
+compatibility: Requires git. Uses the blitzy-cli and gh command-line tools when available, falling back to the Blitzy web UI otherwise.
 metadata:
   author: nexdrew
   version: "0.2.0"

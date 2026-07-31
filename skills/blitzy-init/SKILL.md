@@ -2,7 +2,7 @@
 name: blitzy-init
 description: Set up or repair a Blitzy workspace. Use when the user wants to get started with Blitzy, initialize or bootstrap a repo for Blitzy, create a parent repo with submodules for Blitzy ingestion, set up .blitzyignore, install the blitzy CLI or gh CLI, or create the shared .blitzy memory directory that the other blitzy-* skills depend on. Run this before any other blitzy-* skill in a workspace that has no .blitzy directory.
 license: MIT
-compatibility: Requires git. Uses the blitzy-cli (npm) and gh command-line tools when available, falling back to the Blitzy web UI otherwise.
+compatibility: Requires git. Uses the blitzy-cli and gh command-line tools when available, falling back to the Blitzy web UI otherwise.
 metadata:
   author: nexdrew
   version: "0.2.0"

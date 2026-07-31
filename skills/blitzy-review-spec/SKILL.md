@@ -2,7 +2,7 @@
 name: blitzy-review-spec
 description: Use after Blitzy ingests a codebase, when reviewing or verifying a Blitzy Technical Specification / Tech Spec against the actual source code. Covers downloading the spec, a structural pass over the 9-section skeleton, source-grounded verification of architecture, technology stack, feature catalog (F-xxx), counts, file paths, and integration claims, and verdict routing (proceed, re-ingest, or Sync tech spec). The Tech Spec is the persistent knowledge base every future generation builds on, so errors here compound downstream. Trigger phrases include "review the tech spec", "verify the spec", "check Blitzy's understanding of the codebase", "is the spec accurate", "spec vs source", "tech spec review".
 license: MIT
-compatibility: Requires git. Uses the blitzy-cli (npm) and gh command-line tools when available, falling back to the Blitzy web UI otherwise.
+compatibility: Requires git. Uses the blitzy-cli and gh command-line tools when available, falling back to the Blitzy web UI otherwise.
 metadata:
   author: nexdrew
   version: "0.2.0"

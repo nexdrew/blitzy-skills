@@ -2,7 +2,7 @@
 name: blitzy-env
 description: "Work with Blitzy Environments — list and inspect existing environment definitions, and author high-quality new ones. Use when the user wants to create, write, review, update, clone, or choose a Blitzy environment; needs environment setup instructions, build and run instructions, toolchain versions, variables, secrets, or UI login credentials configured; asks which environment a project should attach or how multiple attached environments merge (position, priority, first-writer-wins); or needs to run or interpret the Test Setup environment validation. Covers blitzy envs CLI inspection, the reuse-before-create decision, natural-language setup-instruction authoring, variables-vs-secrets handling, and writing the finished definition to .blitzy/prompts for manual entry in the Blitzy UI."
 license: MIT
-compatibility: Requires git. Uses the blitzy-cli (npm) and gh command-line tools when available, falling back to the Blitzy web UI otherwise.
+compatibility: Requires git. Uses the blitzy-cli and gh command-line tools when available, falling back to the Blitzy web UI otherwise.
 metadata:
   author: nexdrew
   version: "0.2.0"

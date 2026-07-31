@@ -2,7 +2,7 @@
 name: blitzy-review-aap
 description: Review a Blitzy Agent Action Plan (AAP) before approving code generation. Use when the user wants to review, verify, edit, or approve an AAP or Blitzy plan, decide between approving, editing, refining, or discarding it, or check that rules and prompt requirements made it into the plan. The AAP is the primary control point — what the AAP says is what the code does.
 license: MIT
-compatibility: Requires git. Uses the blitzy-cli (npm) and gh command-line tools when available, falling back to the Blitzy web UI otherwise.
+compatibility: Requires git. Uses the blitzy-cli and gh command-line tools when available, falling back to the Blitzy web UI otherwise.
 metadata:
   author: nexdrew
   version: "0.2.0"

@@ -2,7 +2,7 @@
 name: blitzy-status
 description: Show the live state of all Blitzy projects in this workspace and what to do next on each. Use when the user asks about Blitzy project status, what is Blitzy doing, whether generation or a PR is done, what the next step is, or wants a cross-project dashboard after time away. Reconciles the committed .blitzy memory with live platform and GitHub state.
 license: MIT
-compatibility: Requires git. Uses the blitzy-cli (npm) and gh command-line tools when available, falling back to the Blitzy web UI otherwise.
+compatibility: Requires git. Uses the blitzy-cli and gh command-line tools when available, falling back to the Blitzy web UI otherwise.
 metadata:
   author: nexdrew
   version: "0.2.0"
