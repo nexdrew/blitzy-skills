@@ -2,10 +2,10 @@
 
 <!-- Shared reference. Source of truth: /shared/blitzy-cli.md — edit there, then run scripts/sync-shared.mjs. -->
 
-[`blitzy-cli`](https://github.com/nexdrew/blitzy-cli) is an unofficial, read-only CLI
-for the Blitzy platform API. These skills use it when available and fall back to the
-Blitzy web UI (ask the user to download/paste) when it isn't. Requires v1.1+ for the
-behaviors below; check with `blitzy --version`.
+`blitzy-cli` is an unofficial, open-source (MIT), read-only CLI for the Blitzy
+platform API, distributed on npm and Homebrew as `blitzy-cli`. These skills use it
+when available and fall back to the Blitzy web UI (ask the user to download/paste)
+when it isn't. Requires v1.1+ for the behaviors below; check with `blitzy --version`.
 
 ## Pre-flight
 
@@ -60,15 +60,14 @@ npm install -g blitzy-cli             # npm (Node ≥ 20)
 npx blitzy-cli <command>              # or run ad hoc via npx without installing
 ```
 
-Supply chain: blitzy-cli is open source (MIT, https://github.com/nexdrew/blitzy-cli),
-and every release is built and published by its public CI. Both channels are
-independently verifiable — the npm package is published with npm provenance via OIDC
-trusted publishing (checkable with `npm audit signatures`), and the Homebrew formula
-pins each binary's sha256, with every binary carrying a GitHub build-provenance
-attestation (`gh attestation verify <file> --repo nexdrew/blitzy-cli`). Raw standalone
-binaries also exist for environments with neither brew nor Node — see the blitzy-cli
-project README. Do not download or install raw binaries on the user's behalf; that is
-a manual step for the user to take and verify themselves.
+Supply chain: every blitzy-cli release is built and published by its public CI, and
+both channels are independently verifiable — the npm package is published with npm
+provenance via OIDC trusted publishing (checkable with `npm audit signatures`), and
+the Homebrew formula pins each binary's sha256, with every binary carrying a GitHub
+build-provenance attestation (`gh attestation verify <file> --repo nexdrew/blitzy-cli`).
+Install only through these package managers — never download standalone binaries or
+run installer scripts on the user's behalf. If the machine has neither brew nor Node,
+stop and let the user choose, fetch, and verify an install path themselves.
 
 Do NOT try to call Blitzy's API with curl/fetch directly — the host is behind
 Cloudflare bot protection and rejects non-browser HTTP clients; the CLI's transport

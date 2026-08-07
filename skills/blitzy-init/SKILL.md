@@ -123,11 +123,10 @@ Both channels are verifiable: the npm package is published with npm provenance
 binary carries a GitHub build-provenance attestation
 (`gh attestation verify <file> --repo nexdrew/blitzy-cli`).
 
-If the machine has neither brew nor Node, tell the user that raw standalone binaries
-exist for each release of the blitzy-cli project — but do NOT download or install one
-on their behalf. Point them at the project README
-(https://github.com/nexdrew/blitzy-cli) and let them fetch, verify, and trust a binary
-themselves; then continue once `blitzy --version` works.
+If the machine has neither brew nor Node, stop here — do NOT download standalone
+binaries or run installer scripts on the user's behalf. Ask the user to install
+Homebrew or Node (or to obtain and verify the CLI by whatever means they trust), and
+continue once `blitzy --version` works.
 
 Then authentication: `blitzy login` is interactive (password prompt) — the user must run
 it themselves. In Claude Code, suggest they type `! blitzy login` to run it inside the

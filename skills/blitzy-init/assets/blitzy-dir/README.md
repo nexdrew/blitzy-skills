@@ -2,9 +2,9 @@
 
 This directory is the shared, git-committed memory for this workspace's
 [Blitzy](https://blitzy.com) projects. It is created and maintained by the
-[blitzy-skills](https://github.com/nexdrew/blitzy-skills) agent skills, and it exists so
-that Blitzy project state survives across AI-agent sessions and transfers between
-engineers.
+`blitzy-skills` agent skills (`npx skills add` package `nexdrew/blitzy-skills`), and it
+exists so that Blitzy project state survives across AI-agent sessions and transfers
+between engineers.
 
 - `workspace.md` — repo map (parent + submodules), tooling state, org facts.
 - `conventions.md` — this team's conventions; agents read it before acting.
