@@ -23,7 +23,8 @@ repo holding submodules).
 │   └── <slug>.md      # one file per Blitzy project (see schema below)
 ├── prompts/           # authored artifacts: scope docs, ingestion/generation/refine prompts
 ├── reviews/           # review reports and findings files
-├── artifacts/         # `blitzy download` output — gitignored, reproducible
+├── artifacts/         # gitignored, machine-local: `blitzy download` output and
+│   └── status-cache/  #   per-project platform-fact cache written by blitzy-status
 └── .gitignore         # ignores artifacts/
 ```
 
@@ -36,9 +37,10 @@ ingestion quota and internal notes never leak into Blitzy's generation context.
   which lifecycle stage we've acted through, review verdicts, refine round count,
   who's on the hook next. Update the project file after every significant action.
 - **Platform facts are always fetched live** — run status, PR states, CI results come
-  from `blitzy projects <uuid> --json` and `gh` at the moment you need them. Never
-  treat platform facts written in a file as current; a `lastSeen` block is a stale
-  cache for offline rendering only, and must be labeled as such when shown.
+  from `blitzy projects <uuid> --json` and `gh` at the moment you need them. Platform
+  facts never go in committed files: the only fact cache is the machine-local
+  `artifacts/status-cache/<slug>.json` (gitignored), written by `blitzy-status` for
+  offline rendering only and always labeled stale when shown.
 
 ## Project file schema (`projects/<slug>.md`)
 
@@ -51,7 +53,7 @@ name: AloraDL Native Port                   # Blitzy project name
 repo: LivTech-Alora/blitzy-pilot-parent     # workspace repo
 branch: main
 buildType: BUILD > Refactor codebase        # one of the 7 UI build types
-stage: reviewing-code   # authored | submitted | aap-review | aap-approved |
+stage: reviewing-code   # scoping | authored | submitted | aap-review | aap-approved |
                         # generating | reviewing-code | refining | team-review |
                         # merged | synced | closed
 refineRound: 1          # completed Refine PR cycles
@@ -59,9 +61,6 @@ nextAction: "verify refine round 1 diff, then hand to team review"
 owner: andrew           # who's on the hook for nextAction
 prs: [19]               # parent-repo PR numbers (submodule PRs live in the log)
 updated: 2026-07-30
-lastSeen:               # optional stale cache of platform state
-  status: GITHUB_COMPLETED
-  checkedAt: 2026-07-30T14:00:00Z
 ---
 
 ## Log
@@ -74,6 +73,10 @@ lastSeen:               # optional stale cache of platform state
 
 Keep frontmatter values short; put detail in the log and link to files in `prompts/`
 and `reviews/`. Log entries are newest-first, dated, one decision per line.
+`nextAction` is a single decision clause — never embed derived facts (commit SHAs, CI
+lane states, run percentages) that go stale and invite merge conflicts; fetch those
+live. Single-writer rule: only the file's `owner` edits a project file; a handoff is
+one commit changing `owner`. Dated log lines from different writers merge trivially.
 
 ## conventions.md — the team config layer
 
