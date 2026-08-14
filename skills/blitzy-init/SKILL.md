@@ -5,7 +5,7 @@ license: MIT
 compatibility: Requires git. Uses the blitzy-cli and gh command-line tools when available, falling back to the Blitzy web UI otherwise.
 metadata:
   author: nexdrew
-  version: "0.2.2"
+  version: "0.3.0"
 ---
 
 # blitzy-init — bootstrap a Blitzy workspace
