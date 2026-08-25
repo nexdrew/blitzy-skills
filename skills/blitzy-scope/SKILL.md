@@ -5,7 +5,7 @@ license: MIT
 compatibility: Requires git. Uses the blitzy-cli and gh command-line tools when available, falling back to the Blitzy web UI otherwise.
 metadata:
   author: nexdrew
-  version: "0.3.0"
+  version: "0.4.0"
 ---
 
 # blitzy-scope
@@ -109,7 +109,11 @@ This is where scoping earns its keep. For the selected set of projects:
      workflow files, and shared config like `.csproj`/`package.json`) — never from
      memory or from the candidate description alone.
    - Verify zero overlap. Any shared file — even one — means the projects must be
-     sequenced instead. Also fence against **in-flight** projects found in step 1.
+     sequenced instead. Also fence against **in-flight** projects found in step 1 —
+     and, when the CLI is available, against the team's live in-flight work:
+     `blitzy projects --json --teams <team-uuid>` (CLI v1.3+) lists platform projects
+     shared with the team, including teammates' generations that have no local
+     `.blitzy/projects/` file. Resolve the team uuid with `blitzy teams --json`.
    - Record the footprints and the verification result in both scope docs, so the
      fence survives into AAP review (where the actual planned file list can be
      re-checked against it).
@@ -134,13 +138,18 @@ For each confirmed project:
    `blitzy envs` and `blitzy rules` (fall back to asking the user to check the UI).
    Name the exact env/rule names in the scope doc; flag any that must be created
    (that is `blitzy-env` / `blitzy-rule` work — list it as a prerequisite).
-3. If quota might constrain the plan, run `blitzy usage --json` and compare remaining
+3. Decide who the project is for and record it in the scope doc: a custom team,
+   Personal (unshared), or Org-shared. Verify a custom team exists and the user
+   belongs to it with `blitzy teams` (CLI v1.3+; shows each team's name, uuid, and
+   the user's role — fall back to the UI). Sharing itself is chosen in the Blitzy UI
+   at project creation; the CLI is read-only.
+4. If quota might constrain the plan, run `blitzy usage --json` and compare remaining
    quota against the summed LOC estimates; reorder or defer projects if needed.
-4. Create or update `.blitzy/projects/<slug>.md` per the schema in
+5. Create or update `.blitzy/projects/<slug>.md` per the schema in
    `references/_shared/blitzy-memory.md`, with `stage: authored`, the chosen
    `buildType`, and `nextAction: "author generation prompt via blitzy-prompt"`.
    Add a dated log line linking the scope doc.
-5. Tell the user the handoff: run `blitzy-prompt` per project, in sequence order,
+6. Tell the user the handoff: run `blitzy-prompt` per project, in sequence order,
    starting with the first unblocked project.
 
 ## Scope doc template
@@ -150,6 +159,8 @@ For each confirmed project:
 
 - **Slug**: <slug>  ·  **Repo/branch**: <org/name> @ <branch>
 - **Build type**: <one of the 7, verbatim>
+- **Team**: <custom team name, Personal, or Org-shared> — sharing is set in the UI
+  at creation
 - **Estimate**: ~<N> files, ~<N> LOC delta (rough) → expect <minutes | tens of
   minutes | longer> generation
 - **Status**: scoped <YYYY-MM-DD>; project file: ../projects/<slug>.md
