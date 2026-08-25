@@ -110,23 +110,39 @@ Committed `.blitzyignore` = team-wide consistency.
 
 ### 5. Install the `blitzy` CLI
 
-Check `blitzy --version` first. If missing, install through a package manager — pick
-whichever the machine already has:
+Check `blitzy --version` first. If missing, tell the user which channels the machine
+supports and get their explicit confirmation before installing anything:
 
 - **Homebrew** (macOS/Linux; installs a standalone binary, no Node needed):
   `brew install nexdrew/tap/blitzy-cli`
-- **npm** (Node ≥ 20): `npm install -g blitzy-cli` — or skip installing and use
-  `npx blitzy-cli <command>` per invocation.
+- **Scoop** (Windows; installs a standalone binary, no Node needed):
+  `scoop bucket add nexdrew https://github.com/nexdrew/scoop-bucket` then
+  `scoop install nexdrew/blitzy-cli`
+- **npm** (Node ≥ 20, any OS): `npm install -g blitzy-cli` — or skip installing and
+  use `npx blitzy-cli <command>` per invocation.
 
-Both channels are verifiable: the npm package is published with npm provenance
-(`npm audit signatures`); the Homebrew formula pins each binary's sha256, and every
-binary carries a GitHub build-provenance attestation
-(`gh attestation verify <file> --repo nexdrew/blitzy-cli`).
+Then **verify the installed artifact before first use**. Every release is built and
+published by blitzy-cli's public release workflow
+([release.yml](https://github.com/nexdrew/blitzy-cli/blob/main/.github/workflows/release.yml)),
+and each channel is independently checkable:
 
-If the machine has neither brew nor Node, stop here — do NOT download standalone
-binaries or run installer scripts on the user's behalf. Ask the user to install
-Homebrew or Node (or to obtain and verify the CLI by whatever means they trust), and
-continue once `blitzy --version` works.
+- Homebrew: `gh attestation verify "$(command -v blitzy)" --repo nexdrew/blitzy-cli`
+  (`command -v` resolves the brew symlink; robust across brew prefixes)
+- Scoop (PowerShell; on arm64 verify `blitzy-windows-arm64.exe`):
+  `gh attestation verify "$(scoop prefix blitzy-cli)\blitzy-windows-x64.exe" --repo nexdrew/blitzy-cli`
+- npm: `npm audit signatures` is project-scoped (it rejects `-g`), so audit a scratch
+  install of the same registry artifact:
+  `cd "$(mktemp -d)" && npm install blitzy-cli --no-fund && npm audit signatures`
+
+The attestation checks need the `gh` CLI (step 6) — if it isn't installed and
+authenticated yet, do step 6 first and come back. If verification fails, stop:
+report it to the user and do not run the binary.
+
+If the machine has none of brew, scoop, or Node, stop here — do NOT download
+standalone binaries, run installer scripts, or install a package manager itself
+(including Scoop) on the user's behalf. Ask the user to install Homebrew, Scoop, or
+Node (or to obtain and verify the CLI by whatever means they trust), and continue
+once `blitzy --version` works.
 
 Then authentication: `blitzy login` is interactive (password prompt) — the user must run
 it themselves. In Claude Code, suggest they type `! blitzy login` to run it inside the
@@ -137,9 +153,9 @@ browser session). Verify afterwards with `blitzy auth --json` (exit 0 = good; se
 ### 6. Install `gh` (GitHub CLI)
 
 `gh` powers submodule-PR discovery and PR review flows. Check `gh --version` and
-`gh auth status`. If missing: `brew install gh` (macOS), the OS package manager, or
-https://cli.github.com. `gh auth login` is interactive — the user runs it (same `!`
-trick applies).
+`gh auth status`. If missing: `brew install gh` (macOS), `scoop install gh` (Windows),
+the OS package manager, or https://cli.github.com. `gh auth login` is interactive —
+the user runs it (same `!` trick applies).
 
 ### 7. Wrap up
 

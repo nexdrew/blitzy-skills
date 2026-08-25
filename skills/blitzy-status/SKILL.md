@@ -34,7 +34,12 @@ derive facts) and `references/_shared/blitzy-cli.md` for CLI usage before starti
   is authenticated — check the `gh` block in the JSON to know whether submodule data is
   trustworthy or just absent). Untracked-but-live projects: if the user asks for
   "everything", also `blitzy projects --json --limit 20` and list platform projects
-  that have no `.blitzy/projects/` file (offer to create files for them).
+  that have no `.blitzy/projects/` file (offer to create files for them). When the
+  workspace's work belongs to a team, narrow that sweep with `--teams <ids>`
+  (CLI v1.3+): comma-delimited team uuids and/or the scopes `PERSONAL` (unshared,
+  owner-only) and `ORGANIZATION` (company-shared). Resolve team names to uuids with
+  `blitzy teams --json`; a project detail's `sharedTeams` field shows which teams it
+  is shared with.
 
 ### 2. Reconcile
 
@@ -111,6 +116,7 @@ When a project file's `nextAction` is stale or missing, derive it from the stage
 - Submodule PR data comes via `gh`; when the detail JSON's `gh.used` is false, say
   "submodule PRs unknown (gh unavailable/unauthenticated)" rather than "none".
 - `blitzy projects --json` without a uuid fans out one API call per project — keep
-  `--limit` modest.
+  `--limit` modest, and scope with `--teams` (v1.3+) where a team fits so the fan-out
+  covers only relevant projects.
 - Respect `conventions.md` (merge authority, review passes) when phrasing next actions:
   never suggest that you or Blitzy merge anything.
