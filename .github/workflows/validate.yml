@@ -18,6 +18,24 @@ jobs:
       - name: Shared references in sync
         run: node scripts/sync-shared.mjs --check
 
+      # release-please's generic updater silently skips a file whose annotation
+      # is missing or mistyped, so enforce it here: every skill's frontmatter
+      # version must carry the annotation and match .release-please-manifest.json
+      # exactly — all skills version in lockstep.
+      - name: Skill versions annotated and in lockstep
+        run: |
+          version=$(node -p 'require("./.release-please-manifest.json")["."]')
+          fail=0
+          for f in skills/*/SKILL.md; do
+            want="  version: \"${version}\" # x-release-please-version"
+            got=$(grep -E '^  version:' "$f" || true)
+            if [ "$got" != "$want" ]; then
+              echo "::error file=$f::expected '$want' but found '$got'"
+              fail=1
+            fi
+          done
+          exit $fail
+
       - name: No SKILL.md at repo root
         run: test ! -f SKILL.md
 

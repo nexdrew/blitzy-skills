@@ -96,6 +96,18 @@ npx skills add ./ --list
 Each skill is self-contained (shared references are synced copies under
 `references/_shared/`), so single-skill installs work.
 
+## Releasing
+
+Releases are automated with
+[release-please](https://github.com/googleapis/release-please-action) (`.github/workflows/release.yml`).
+Commits to `main` must follow [Conventional Commits](https://www.conventionalcommits.org)
+(`feat:` → minor, `fix:` → patch; while pre-1.0, breaking changes bump the minor).
+Each push to `main` updates a "Release PR"; merging it bumps every skill's
+`metadata.version` frontmatter, all in lockstep via the
+`# x-release-please-version` annotations, updates `CHANGELOG.md`, tags the
+version, and creates the GitHub Release. Never bump a skill version by hand; the
+validate workflow fails if an annotation goes missing or versions drift.
+
 ## License
 
 MIT © [Andrew Goode](https://github.com/nexdrew)

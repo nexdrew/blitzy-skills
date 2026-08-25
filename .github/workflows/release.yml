@@ -1,0 +1,24 @@
+name: Release
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  release-please:
+    name: Release PR
+    runs-on: ubuntu-latest
+    steps:
+      # Reads release-please-config.json and .release-please-manifest.json.
+      # Merges to main accumulate into a Release PR that bumps version.txt,
+      # CHANGELOG.md, and the frontmatter version in every skills/*/SKILL.md
+      # (via the `# x-release-please-version` annotations, matched by the
+      # glob extra-files entry). Merging that Release PR tags the version and
+      # creates the GitHub Release. All 11 skills version in lockstep;
+      # validate.yml enforces that the annotations stay present and in sync.
+      - uses: googleapis/release-please-action@v5
+        id: release
